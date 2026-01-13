@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访问被拒绝 - 企业安全警告</title>
+    <style>
+        /* 内联 CSS */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .logo {
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .warning-icon {
+            font-size: 60px;
+            margin: 20px 0;
+        }
+        .content ul {
+            text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+            padding-left: 20px;
+        }
+        .actions {
+            margin: 30px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:first-child {
+            background-color: #007bff;
+            color: white;
+        }
+        button:last-child {
+            background-color: #6c757d;
+            color: white;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- 替换为你的企业Logo -->
+            <img src="https://via.placeholder.com/150x50?text=Company+Logo" alt="公司Logo" class="logo">
+            <h1>访问被拒绝</h1>
+        </div>
+        <div class="content">
+            <p class="warning-icon">⚠️</p>
+            <h2>此网站已被企业安全策略拦截</h2>
+            <p>您尝试访问的网站可能存在以下风险：</p>
+            <ul>
+                <li>恶意软件或钓鱼攻击</li>
+                <li>数据泄露风险</li>
+                <li>违反企业网络使用政策</li>
+            </ul>
+            <div class="actions">
+                <button onclick="goBack()">返回安全页面</button>
+                <button onclick="contactSupport()">联系IT支持</button>
+            </div>
+        </div>
+        <div class="footer">
+            <p>企业信息安全部 © 2023</p>
+        </div>
+    </div>
+
+    <!-- 内联 JavaScript -->
+    <script>
+        // 返回上一页
+        function goBack() {
+            window.history.back();
+        }
+
+        // 联系IT支持（替换为实际邮箱或工单链接）
+        function contactSupport() {
+            const blockedUrl = new URLSearchParams(window.location.search).get('url') || '未知网站';
+            window.location.href = `mailto:it-support@company.com?subject=网站拦截申诉&body=我被拦截的网站：${blockedUrl}`;
+        }
+
+        // 动态显示被拦截的URL（如果通过?url=参数传递）
+        document.addEventListener('DOMContentLoaded', function() {
+            const blockedUrl = new URLSearchParams(window.location.search).get('url');
+            if (blockedUrl) {
+                const warningText = document.createElement('p');
+                warningText.innerHTML = `<strong>拦截的网址：</strong><code>${blockedUrl}</code>`;
+                document.querySelector('.content').insertBefore(warningText, document.querySelector('.actions'));
+            }
+        });
+    </script>
+</body>
+</html>
